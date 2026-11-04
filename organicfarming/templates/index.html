@@ -1,0 +1,268 @@
+{% include 'nav.html' %}
+{%block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+
+<div class="main-container">
+    <section class="home">
+        <div class="hero-copy">
+            <span class="section-label">LOCAL. TRACEABLE. ORGANIC.</span>
+            <h1>Farm Fresh Food with Real Stories</h1>
+            <p>Explore farm storefronts, trace harvests, subscribe to weekly Farm Boxes, and vote on the next season’s crop.</p>
+            <div class="hero-actions">
+                <a href="/shop/" class="cta-button">Shop the Market</a>
+                <a href="#storefronts" class="cta-button secondary">Meet Farmers</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section features">
+        <div class="section-header">
+            <span class="section-label">WHY ORGANIC</span>
+            <h2 class="section-title">A food experience built on trust</h2>
+            <p class="section-subtitle">Every product on our market is connected to a farmer, a harvest date, and a sustainable story.</p>
+        </div>
+
+        <div class="features-grid">
+            <article class="feature-card">
+                <div class="feature-icon">🌾</div>
+                <h3>Transparent Origins</h3>
+                <p>See exactly where each crop was grown and when it was harvested, so you know what’s truly fresh.</p>
+            </article>
+            <article class="feature-card">
+                <div class="feature-icon">🤝</div>
+                <h3>Community Farming</h3>
+                <p>Vote for next season’s crops and help farmers focus on what customers want most.</p>
+            </article>
+            <article class="feature-card">
+                <div class="feature-icon">📦</div>
+                <h3>Weekly Farm Boxes</h3>
+                <p>Choose a weekly subscription box filled with curated seasonal produce from trusted farms.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="section storefronts" id="storefronts">
+        <div class="section-header">
+            <span class="section-label">FARM STOREFRONTS</span>
+            <h2 class="section-title">Meet the families behind your food</h2>
+            <p class="section-subtitle">Each storefront shares the farm’s location, methods, and a short story from the grower.</p>
+        </div>
+
+        <div class="storefronts-grid">
+            <article class="storefront-card">
+                <div class="storefront-meta">
+                    <span class="badge">Nashik, Maharashtra</span>
+                    <span class="badge">Harvest: April 22</span>
+                </div>
+                <h3>Green Valley Farm</h3>
+                <p>Regenerative soil and crop rotation are at the heart of this family farm. They grow brassicas, leafy greens, and aromatic herbs with seasonal care.</p>
+                <div class="storefront-methods">
+                    <span class="badge">Methods: Compost, Mulching</span>
+                    <span class="badge">Story: Farm-to-table heritage</span>
+                </div>
+            </article>
+
+            <article class="storefront-card">
+                <div class="storefront-meta">
+                    <span class="badge">Bengaluru Outskirts</span>
+                    <span class="badge">Harvest: April 18</span>
+                </div>
+                <h3>Morning Meadow</h3>
+                <p>Rain-fed vegetables and agroforestry create a calm ecosystem where seasonal produce grows naturally through the monsoon.</p>
+                <div class="storefront-methods">
+                    <span class="badge">Methods: Permaculture, Rainfed</span>
+                    <span class="badge">Story: Community-driven farming</span>
+                </div>
+            </article>
+
+            <article class="storefront-card">
+                <div class="storefront-meta">
+                    <span class="badge">Wayanad, Kerala</span>
+                    <span class="badge">Harvest: April 12</span>
+                </div>
+                <h3>Sunrise Orchard</h3>
+                <p>Agroforestry and gentle hand-harvesting keep both the soil and fruits healthy. This farm specializes in leafy greens, root vegetables, and early harvest crops.</p>
+                <div class="storefront-methods">
+                    <span class="badge">Methods: Agroforestry, Organic</span>
+                    <span class="badge">Story: Nature-first farming</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="section farm-boxes">
+        <div class="section-header">
+            <span class="section-label">SUBSCRIPTIONS</span>
+            <h2 class="section-title">Weekly Farm Boxes for your kitchen</h2>
+            <p class="section-subtitle">Flexible weekly CSA plans give you a rotating selection of seasonal vegetables and farm essentials.</p>
+        </div>
+
+        <div class="features-grid">
+            <article class="farm-box-card">
+                <h3>Choose your box</h3>
+                <p>Fresh, seasonal produce delivered weekly from local farms. Customize your box size and delivery area.</p>
+                <form id="farmBoxForm" class="farm-box-form">
+                    <input type="text" id="subscriberName" class="farm-box-input" placeholder="Your name" required>
+                    <input type="email" id="subscriberEmail" class="farm-box-input" placeholder="Email address" required>
+                    <select id="boxSize" class="region-select" required>
+                        <option value="Small">Small Box - 4 items</option>
+                        <option value="Medium">Medium Box - 7 items</option>
+                        <option value="Large">Large Box - 10 items</option>
+                    </select>
+                    <button type="submit" class="cta-button">Reserve My Farm Box</button>
+                </form>
+            </article>
+
+            <article class="vote-card">
+                <h3>Interactive Crop Requests</h3>
+                <p>Vote now for what our farmers should plant next season. Your voice helps shape the next harvest.</p>
+                <div class="vote-grid">
+                    <div class="feature-card">
+                        <h3>Kale</h3>
+                        <p>Demand for hearty greens is rising — vote to bring more kale to the next box.</p>
+                        <button type="button" onclick="castVote('Kale')">Vote for Kale</button>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Carrots</h3>
+                        <p>Sweet, crunchy carrots are perfect for salads and soups. Cast your vote today.</p>
+                        <button type="button" onclick="castVote('Carrots')">Vote for Carrots</button>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Beets</h3>
+                        <p>Root vegetables add color and nutrition to every meal. Encourage the next crop planning.</p>
+                        <button type="button" onclick="castVote('Beets')">Vote for Beets</button>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="section season-calendar">
+        <div class="section-header">
+            <span class="section-label">IN SEASON</span>
+            <h2 class="section-title">Seasonal Harvest Calendar</h2>
+            <p class="section-subtitle">Select your region to see what’s currently ripest and freshest.</p>
+        </div>
+
+        <div class="season-calendar">
+            <div class="calendar-controls">
+                <label for="regionSelect">Region</label>
+                <select id="regionSelect" class="region-select">
+                    <option value="north">North India</option>
+                    <option value="south">South India</option>
+                    <option value="east">East India</option>
+                    <option value="west">West India</option>
+                </select>
+            </div>
+
+            <div class="season-grid" id="seasonGrid"></div>
+        </div>
+    </section>
+
+    <section class="section traceability">
+        <div class="section-header">
+            <span class="section-label">TRACEABILITY</span>
+            <h2 class="section-title">Know where your food was grown</h2>
+            <p class="section-subtitle">A quick timeline of harvests, farms, and the stories behind each product.</p>
+        </div>
+
+        <div class="timeline">
+            <article class="timeline-step">
+                <span class="timeline-step-number">1</span>
+                <h3>Green Valley Farm • Nashik</h3>
+                <p>Leafy greens harvested on April 22, grown using regenerative soil practices and composting.</p>
+            </article>
+            <article class="timeline-step">
+                <span class="timeline-step-number">2</span>
+                <h3>Morning Meadow • Bengaluru</h3>
+                <p>Seasonal vegetables harvested on April 18, nurtured with rainwater and permaculture design.</p>
+            </article>
+            <article class="timeline-step">
+                <span class="timeline-step-number">3</span>
+                <h3>Sunrise Orchard • Wayanad</h3>
+                <p>Root vegetables harvested on April 12, grown under canopy trees to protect biodiversity.</p>
+            </article>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <p>© 2026 Organic Farming Website | Healthy Food, Healthy Life 🌿</p>
+</footer>
+
+<script>
+function showNotification(message, type = 'success') {
+    const existing = document.querySelector('.notification');
+    if (existing) existing.remove();
+
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `<span>${message}</span><button class="close-btn" onclick="this.parentElement.remove()">×</button>`;
+    document.body.appendChild(notification);
+    setTimeout(() => notification.classList.add('show'), 10);
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+
+function castVote(crop) {
+    const votes = JSON.parse(localStorage.getItem('cropVotes') || '{}');
+    votes[crop] = (votes[crop] || 0) + 1;
+    localStorage.setItem('cropVotes', JSON.stringify(votes));
+    showNotification(`Thanks! Your vote for ${crop} is recorded.`, 'success');
+}
+
+function subscribeFarmBox(event) {
+    event.preventDefault();
+    const name = document.getElementById('subscriberName').value.trim();
+    const email = document.getElementById('subscriberEmail').value.trim();
+    const size = document.getElementById('boxSize').value;
+    if (!name || !email) {
+        showNotification('Please add your name and email to subscribe.', 'error');
+        return;
+    }
+    const submissions = JSON.parse(localStorage.getItem('farmBoxSubscribers') || '[]');
+    submissions.push({ name, email, size, date: new Date().toISOString() });
+    localStorage.setItem('farmBoxSubscribers', JSON.stringify(submissions));
+    document.getElementById('farmBoxForm').reset();
+    showNotification('Farm Box subscription confirmed! We will follow up with details.', 'success');
+}
+
+function updateSeasonCalendar() {
+    const region = document.getElementById('regionSelect').value;
+    const seasonMap = {
+        north: ['Kale', 'Spinach', 'Carrots', 'Peas'],
+        south: ['Eggplant', 'Okra', 'Banana Leaves', 'Drumsticks'],
+        east: ['Mustard Greens', 'Brinjal', 'Pumpkin', 'Lemongrass'],
+        west: ['Cauliflower', 'Cabbage', 'Tomato', 'Chillies']
+    };
+
+    const headlines = {
+        north: 'Cool-season greens and root crops are thriving in the north.',
+        south: 'Rain-ready vegetables are at their peak in the south.',
+        east: 'Aromatic and leafy harvests are freshest in the east.',
+        west: 'Crisp brassicas and sun-kissed tomatoes are in season in the west.'
+    };
+
+    const seasonGrid = document.getElementById('seasonGrid');
+    seasonGrid.innerHTML = `<article class="calendar-card"><h3>${headlines[region]}</h3><ul class="season-list"></ul></article>`;
+    const list = seasonGrid.querySelector('.season-list');
+    seasonMap[region].forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        list.appendChild(li);
+    });
+}
+
+const farmBoxForm = document.getElementById('farmBoxForm');
+if (farmBoxForm) farmBoxForm.addEventListener('submit', subscribeFarmBox);
+const regionSelect = document.getElementById('regionSelect');
+if (regionSelect) regionSelect.addEventListener('change', updateSeasonCalendar);
+window.addEventListener('load', updateSeasonCalendar);
+</script>
+{% endblock %}
+</body>
+</html>

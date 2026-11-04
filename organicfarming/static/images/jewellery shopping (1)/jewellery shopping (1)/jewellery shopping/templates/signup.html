@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewellery Shopping</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            /* background: linear-gradient(135deg, #667eea, #764ba2); */
+            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH4W1jh9GT7CL0Pi2rmYZKrTArI2axwCjuEQ&s");
+            background-size: 100% 100vh;
+        }
+        .navbar {
+            width: 100%;
+            background: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .navbar .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+        .navbar .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: bold;
+        }
+        .navbar .nav-links a:hover {
+            color: #5642a6;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+        .btn {
+            width: 100%;
+            background: #667eea;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background: #5642a6;
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+            }
+            .navbar .nav-links {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Jewellery Shopping</div>
+        <div class="nav-links">
+            <a href="/signin">Sign In</a>
+            <a href="/signup">Sign Up</a>
+            <a href="/admin">Admin</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>Signup</h2>
+        <form action="/signup" method="post">
+            <div class="input-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="Enter your full name" name="name" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password" name="password" required>
+            </div>
+            <button type="submit" class="btn">Sign Up</button>
+        </form>
+    </div>
+</body>
+</html>

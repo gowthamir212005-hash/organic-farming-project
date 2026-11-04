@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Delivery Details</title>
+<link rel="stylesheet" href="/static/style.css">
+<style>
+body {
+    background: linear-gradient(135deg, #f4fff4, #e8f5e9);
+    padding: 30px 20px;
+}
+.delivery-wrapper {
+    max-width: 560px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 22px;
+}
+.site-logo {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    background: #e8f5e9;
+    display: grid;
+    place-items: center;
+    font-size: 26px;
+    box-shadow: inset 0 0 0 1px rgba(46, 125, 50, 0.12);
+}
+.brand-title {
+    text-align: left;
+}
+.brand-title h1 {
+    margin: 0;
+    color: #2e7d32;
+    font-size: 24px;
+}
+.brand-title p {
+    margin: 4px 0 0;
+    color: #6a6a6a;
+    font-size: 14px;
+}
+.delivery-wrapper h1 {
+    text-align: center;
+    color: #2e7d32;
+    margin-bottom: 8px;
+}
+.delivery-wrapper p {
+    text-align: center;
+    color: #555;
+    margin-bottom: 24px;
+}
+.form-group {
+    margin-top: 16px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #3b3b3b;
+    font-weight: 600;
+}
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #d0d0d0;
+    border-radius: 12px;
+    font-size: 15px;
+    color: #333;
+    background: #fafafa;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #a5d6a7;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(165, 214, 167, 0.18);
+}
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+.place-order {
+    display: block;
+    width: 100%;
+    background: #2e7d32;
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 24px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+.place-order:hover {
+    background: #1b5e20;
+}
+.back-btn {
+    display: inline-block;
+    text-align: center;
+    margin-top: 18px;
+    color: #2e7d32;
+    text-decoration: none;
+    font-weight: 600;
+}
+.back-btn:hover {
+    color: #1b5e20;
+}
+.summary-panel {
+    margin-top: 22px;
+    padding: 18px;
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    border-radius: 12px;
+    color: #5d4037;
+}
+.summary-panel h2 {
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+.summary-panel p {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 0;
+    color: #424242;
+}
+</style>
+<style>
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #4caf50;
+    color: white;
+    padding: 16px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    max-width: 300px;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease;
+}
+.notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+.notification.success {
+    background: #4caf50;
+}
+.notification.error {
+    background: #f44336;
+}
+.notification.warning {
+    background: #ff9800;
+}
+.notification.info {
+    background: #2196f3;
+}
+.notification .close-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+.notification .close-btn:hover {
+    opacity: 1;
+}
+</style>
+</head>
+<body>
+<div class="delivery-wrapper">
+    <div class="page-header">
+        <div class="site-logo">🌿</div>
+        <div class="brand-title">
+            <h1>Organic Farm</h1>
+            <p>Fill in your delivery details to proceed.</p>
+        </div>
+    </div>
+    <h1>Delivery Details</h1>
+    <p>Fill in your address details and continue to payment.</p>
+
+    <form id="delivery-form">
+        <div class="form-group">
+            <label for="full-name">Full Name</label>
+            <input id="full-name" type="text" placeholder="Enter your full name" value="{{ delivery_data.name|default_if_none:'' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input id="phone" type="tel" placeholder="Enter your phone number" value="{{ delivery_data.phone|default_if_none:'' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Delivery Address</label>
+            <textarea id="address" placeholder="House number, street, landmark" required>{{ delivery_data.address|default_if_none:'' }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="city">City</label>
+            <input id="city" type="text" placeholder="Enter your city" value="{{ delivery_data.city|default_if_none:'' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="pincode">Pincode</label>
+            <input id="pincode" type="text" placeholder="Enter your pincode" value="{{ delivery_data.pincode|default_if_none:'' }}" required>
+        </div>
+
+        <button type="submit" class="place-order">Continue to Payment</button>
+    </form>
+
+    <a href="/cart/" class="back-btn">← Back to Cart</a>
+
+    <div class="summary-panel">
+        <h2>Order Summary</h2>
+        <p><span>Items in cart:</span><span id="summary-count">0</span></p>
+        <p><span>Estimated total:</span><strong id="summary-total">₹0</strong></p>
+    </div>
+</div>
+<script>
+function showNotification(message, type = "info") {
+    // Remove existing notifications
+    const existingNotifications = document.querySelectorAll('.notification');
+    existingNotifications.forEach(notification => notification.remove());
+
+    // Create new notification
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <span>${message}</span>
+        <button class="close-btn" onclick="this.parentElement.remove()">×</button>
+    `;
+
+    document.body.appendChild(notification);
+
+    // Trigger animation
+    setTimeout(() => notification.classList.add('show'), 10);
+
+    // Auto remove after 3 seconds
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+
+const deliveryForm = document.getElementById('delivery-form');
+const summaryCount = document.getElementById('summary-count');
+const summaryTotal = document.getElementById('summary-total');
+
+function _parsePrice(value) {
+    if (value == null) return 0;
+    if (typeof value === 'number') return value;
+    const cleaned = String(value).replace(/[^0-9.\-]/g, '');
+    return parseFloat(cleaned) || 0;
+}
+
+function updateOrderSummary(cart) {
+    const total = cart.reduce((sum, item) => {
+        const price = _parsePrice(item.price);
+        const qty = parseInt(item.quantity, 10) || 1;
+        return sum + price * qty;
+    }, 0);
+    const itemCount = cart.reduce((count, item) => count + (parseInt(item.quantity, 10) || 1), 0);
+    summaryCount.textContent = itemCount;
+    summaryTotal.textContent = `₹${total.toFixed(2)}`;
+}
+
+function loadOrderSummary() {
+    let cart = [];
+    try {
+        cart = JSON.parse(localStorage.getItem('cart')) || [];
+    } catch (error) {
+        console.error('Failed to parse cart from localStorage:', error);
+        cart = [];
+    }
+    if (!Array.isArray(cart)) {
+        cart = [];
+    }
+    updateOrderSummary(cart);
+    if (cart.length === 0) {
+        showNotification('Your cart is empty. Please add items before continuing.', 'warning');
+        window.location.href = '/cart/';
+    }
+}
+
+deliveryForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const fullName = document.getElementById('full-name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const city = document.getElementById('city').value.trim();
+    const pincode = document.getElementById('pincode').value.trim();
+
+    if (!fullName || !phone || !address || !city || !pincode) {
+        showNotification('Please complete all delivery fields before continuing.', 'warning');
+        return;
+    }
+    if (phone.length < 10 || !/^\d+$/.test(phone)) {
+        showNotification('Please enter a valid phone number.', 'warning');
+        return;
+    }
+    if (!/^\d{5,6}$/.test(pincode)) {
+        showNotification('Please enter a valid pincode.', 'warning');
+        return;
+    }
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cart.length === 0) {
+        showNotification('Your cart is empty!', 'warning');
+        window.location.href = '/cart/';
+        return;
+    }
+
+    const deliveryInfo = {
+        name: fullName,
+        phone: phone,
+        address: address,
+        city: city,
+        pincode: pincode
+    };
+    localStorage.setItem('deliveryInfo', JSON.stringify(deliveryInfo));
+    window.location.href = '/payment/';
+});
+
+document.addEventListener('DOMContentLoaded', loadOrderSummary);
+</script>
+</body>
+</html>
+```

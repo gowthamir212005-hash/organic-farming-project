@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Organic Farming</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fafaf8;
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            background: linear-gradient(135deg, #2d5016 0%, #4a7c2f 50%, #2d5016 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="1200" height="600" fill="url(%23grid)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 45px;
+            background: #7cc576;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(124, 197, 118, 0.4);
+        }
+
+        .cta-button:hover {
+            background: white;
+            color: #2d5016;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(124, 197, 118, 0.6);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            box-shadow: none;
+        }
+
+        .cta-button.secondary:hover {
+            background: white;
+            color: #2d5016;
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        /* ==================== ANIMATIONS ==================== */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* ==================== STORY SECTION ==================== */
+        .story {
+            background: white;
+            padding: 100px 40px;
+            text-align: center;
+        }
+
+        .story-container {
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .section-label {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #2d5016;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            color: #1b3a0b;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .story-text {
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.9;
+            margin-top: 30px;
+        }
+
+        .accent-green {
+            color: #7cc576;
+        }
+
+        /* ==================== FEATURES SECTION ==================== */
+        .features {
+            background: linear-gradient(135deg, #f5faf2 0%, #e8f5e9 100%);
+            padding: 100px 40px;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid #7cc576;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(124, 197, 118, 0.2);
+            border-top-color: #2d5016;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            color: #1b3a0b;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ==================== SPLIT SECTION ==================== */
+        .split {
+            padding: 100px 40px;
+            background: white;
+        }
+
+        .split-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .split-text h2 {
+            font-size: 2.5rem;
+            color: #1b3a0b;
+            margin-bottom: 25px;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .split-text p {
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.9;
+            margin-bottom: 20px;
+            animation: slideInLeft 0.8s ease-out 0.1s backwards;
+        }
+
+        .split-benefits {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .split-benefits li {
+            padding: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            color: #555;
+            font-size: 1rem;
+            animation: slideInLeft 0.8s ease-out 0.2s backwards;
+        }
+
+        .split-benefits li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #7cc576;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .split-image {
+            background: linear-gradient(135deg, #7cc576 0%, #2d5016 100%);
+            height: 400px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 8rem;
+            animation: slideInRight 0.8s ease-out;
+            box-shadow: 0 25px 50px rgba(124, 197, 118, 0.25);
+        }
+
+        /* ==================== IMPACT SECTION ==================== */
+        .impact {
+            background: linear-gradient(135deg, #2d5016 0%, #4a7c2f 100%);
+            color: white;
+            padding: 100px 40px;
+            text-align: center;
+        }
+
+        .impact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .impact h2 {
+            font-size: 2.8rem;
+            margin-bottom: 70px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+        }
+
+        .impact-card {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .impact-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #7cc576;
+            margin-bottom: 10px;
+        }
+
+        .impact-label {
+            font-size: 1.2rem;
+            color: #d4e8d0;
+            margin-bottom: 10px;
+        }
+
+        .impact-desc {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+
+        /* ==================== WHY CHOOSE US SECTION ==================== */
+        .why-us {
+            background: #fafaf8;
+            padding: 100px 40px;
+        }
+
+        .why-us-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .why-us-header {
+            text-align: center;
+            margin-bottom: 70px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .why-us-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .why-card {
+            background: white;
+            padding: 45px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .why-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(45, 80, 22, 0.15);
+            background: #f9fdf7;
+        }
+
+        .why-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .why-card:hover .why-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .why-card h3 {
+            font-size: 1.4rem;
+            color: #1b3a0b;
+            margin-bottom: 15px;
+        }
+
+        .why-card p {
+            color: #666;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* ==================== CTA SECTION ==================== */
+        .final-cta {
+            background: linear-gradient(135deg, #2d5016 0%, #4a7c2f 50%, #1b3a0b 100%);
+            color: white;
+            padding: 100px 40px;
+            text-align: center;
+        }
+
+        .final-cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .final-cta h2 {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 45px;
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .split-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .split-text h2 {
+                font-size: 1.8rem;
+            }
+
+            .split-image {
+                height: 300px;
+                font-size: 5rem;
+            }
+
+            .impact-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .impact-number {
+                font-size: 2.8rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .cta-button {
+                width: 100%;
+            }
+
+            .final-cta h2 {
+                font-size: 2rem;
+            }
+
+            .hero-content {
+                padding: 20px;
+            }
+
+            .story {
+                padding: 60px 20px;
+            }
+
+            .features {
+                padding: 60px 20px;
+            }
+
+            .split {
+                padding: 60px 20px;
+            }
+
+            .impact {
+                padding: 60px 20px;
+            }
+
+            .why-us {
+                padding: 60px 20px;
+            }
+
+            .final-cta {
+                padding: 60px 20px;
+            }
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: #1b3a0b;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>About Organic Farming</h1>
+            <p>Growing a Sustainable Future, One Farm at a Time</p>
+            <a href="#story" class="cta-button">Explore Our Journey</a>
+        </div>
+    </header>
+
+    <!-- STORY SECTION -->
+    <section class="story" id="story">
+        <div class="story-container">
+            <span class="section-label">OUR STORY</span>
+            <h2 class="section-title">Why Organic Farming Matters</h2>
+            <p class="section-subtitle">We believe in the power of nature and the importance of sustainable agriculture</p>
+            <article class="story-text">
+                Organic farming is more than just a method—it's a <span class="accent-green">movement towards a healthier planet</span>. 
+                By eliminating synthetic pesticides and fertilizers, we protect our soil, water, and biodiversity. Our commitment to 
+                organic practices ensures that you and your family consume the <span class="accent-green">purest, most nutritious food</span> 
+                possible. We partner with local farmers who share our vision of creating a sustainable ecosystem where nature thrives 
+                and communities flourish.
+            </article>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="features">
+        <div class="features-container">
+            <div class="features-header">
+                <span class="section-label">CORE VALUES</span>
+                <h2 class="section-title">What Drives Us</h2>
+                <p class="section-subtitle">Our commitment to excellence and sustainability</p>
+            </div>
+        
+
+            <div class="features-grid">
+                <article class="feature-card">
+                    <div class="feature-icon">🌱</div>
+                    <h3>Pure & Natural</h3>
+                    <p>Zero synthetic chemicals. 100% natural growth processes that preserve soil health and nutritional integrity.</p>
+                </article>
+                
+
+                <article class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Eco-Friendly</h3>
+                    <p>We reduce carbon footprint through sustainable practices and support biodiversity in every field we cultivate.</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">👨‍🌾</div>
+                    <h3>Community First</h3>
+                    <p>Supporting local farmers and building strong communities through fair trade and transparent partnerships.</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3>Quality Assured</h3>
+                    <p>Rigorous testing and certification standards ensure every product meets international organic quality benchmarks.</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Innovation</h3>
+                    <p>Combining traditional wisdom with modern technology to improve yields while maintaining organic integrity.</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">💚</div>
+                    <h3>Health Focused</h3>
+                    <p>Every product is produced with your health in mind, free from GMOs, antibiotics, and harmful substances.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- SPLIT SECTION -->
+    <section class="split">
+        <div class="split-container">
+            <div class="split-text">
+                <h2>The Benefits of Going Organic</h2>
+                <p>Choosing organic isn't just about what you eat—it's about investing in your future and the future of our planet.</p>
+                
+                <ul class="split-benefits">
+                    <li>Higher nutrient density and better taste</li>
+                    <li>No exposure to harmful pesticides and chemicals</li>
+                    <li>Support for sustainable farming practices</li>
+                    <li>Increased biodiversity and environmental health</li>
+                    <li>Better working conditions for farmers</li>
+                    <li>Reduced carbon footprint and emissions</li>
+                </ul>
+
+                <a href="#cta" class="cta-button">Learn More</a>
+            </div>
+
+            <div class="split-image">
+                🥬
+            </div>
+        </div>
+    </section>
+
+    <!-- IMPACT SECTION -->
+    <section class="impact">
+        <div class="impact-container">
+            <h2>Our Growing Impact</h2>
+
+            <div class="impact-grid">
+                <article class="impact-card">
+                    <div class="impact-number">50+</div>
+                    <div class="impact-label">Organic Farms</div>
+                    <div class="impact-desc">Connected and supported across multiple regions</div>
+                </article>
+
+                <article class="impact-card">
+                    <div class="impact-number">100K+</div>
+                    <div class="impact-label">Families Served</div>
+                    <div class="impact-desc">Providing fresh, organic produce monthly</div>
+                </article>
+
+                <article class="impact-card">
+                    <div class="impact-number">25K</div>
+                    <div class="impact-label">Acres Protected</div>
+                    <div class="impact-desc">Preserved through sustainable farming practices</div>
+                </article>
+
+                <article class="impact-card">
+                    <div class="impact-number">99%</div>
+                    <div class="impact-label">Satisfaction Rate</div>
+                    <div class="impact-desc">Customer trust in our organic certification</div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US SECTION -->
+    <section class="why-us">
+        <div class="why-us-container">
+            <div class="why-us-header">
+                <span class="section-label">TRUST & QUALITY</span>
+                <h2 class="section-title">Why Choose Us</h2>
+                <p class="section-subtitle">We set the standard for organic excellence</p>
+            </div>
+
+            <div class="why-us-grid">
+                <article class="why-card">
+                    <div class="why-icon">🏆</div>
+                    <h3>Industry Certified</h3>
+                    <p>All our products carry international organic certifications and meet rigorous quality standards globally.</p>
+                </article>
+
+                <article class="why-card">
+                    <div class="why-icon">🔬</div>
+                    <h3>Lab Tested</h3>
+                    <p>Every batch undergoes comprehensive testing for safety, purity, and nutritional content by certified labs.</p>
+                </article>
+
+                <article class="why-card">
+                    <div class="why-icon">🚚</div>
+                    <h3>Farm to Table</h3>
+                    <p>Direct supply chain ensures freshness and traceability from harvest to your doorstep within days.</p>
+                </article>
+
+                <article class="why-card">
+                    <div class="why-icon">💰</div>
+                    <h3>Fair Pricing</h3>
+                    <p>Competitive prices without compromising quality. We believe organic should be accessible to everyone.</p>
+                </article>
+
+                <article class="why-card">
+                    <div class="why-icon">🤝</div>
+                    <h3>Expert Support</h3>
+                    <p>Our team of agricultural experts is available to answer questions and provide personalized recommendations.</p>
+                </article>
+
+                <article class="why-card">
+                    <div class="why-icon">🌟</div>
+                    <h3>Track Record</h3>
+                    <p>15+ years of excellence in organic farming with thousands of satisfied customers and growing communities.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA SECTION -->
+    <section class="final-cta" id="cta">
+        <div class="final-cta-content">
+            <h2>Ready to Join the Organic Revolution?</h2>
+            <p>Start your journey with us today and experience the difference that certified organic products can make in your life and our world.</p>
+            
+            <div class="cta-buttons">
+                <a href="#" class="cta-button">Get Started Now</a>
+                <a href="#" class="cta-button secondary">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 Organic Farming. All rights reserved.</p>
+        <p>Growing a sustainable future, one farm at a time.</p>
+    </footer>
+</body>
+</html>

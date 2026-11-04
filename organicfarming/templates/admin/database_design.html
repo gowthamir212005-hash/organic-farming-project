@@ -1,0 +1,10 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<div class="module" style="padding:20px;">
+  <h1>Database Design</h1>
+  <div style="white-space:pre-wrap; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; background: #fff; padding:18px; border-radius:8px; border:1px solid rgba(0,0,0,0.04);">
+    {{ doc_content|linebreaksbr }}
+  </div>
+</div>
+{% endblock %}

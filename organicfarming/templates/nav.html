@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Organic Farming</title>
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<style>
+nav {
+    background: var(--surface);
+    color: var(--text);
+    padding: 16px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px var(--shadow);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 999;
+    border-bottom: 2px solid var(--accent-soft);
+    transition: all 0.3s ease;
+}
+
+nav .logo {
+    color: var(--accent-dark);
+    font-weight: 700;
+    font-size: 24px;
+}
+
+nav .shop {
+    list-style: none;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+nav a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--highlight);
+}
+
+nav li {
+    color: var(--text);
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--soft-gold);
+    border: 2px solid var(--accent-dark);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow: 0 4px 12px var(--shadow-green);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    background: var(--gold);
+}
+
+[data-theme="dark"] .theme-toggle {
+    background: var(--accent-soft);
+    box-shadow: 0 4px 12px var(--shadow-gold);
+}
+</style>
+</head>
+<body>
+
+<!-- Theme Toggle Button -->
+<button class="theme-toggle" id="themeToggle" title="Toggle Dark Mode">🌙</button>
+
+<!-- Navigation Bar -->
+<nav>
+    <h2 class="logo">🌿 Organic Farm</h2>
+    <ul class="shop">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/shop/">Shop</a></li>
+        <li><a href="/cart/">Cart</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        {% if user.is_authenticated %}
+            <li>Welcome, {{ user.username }}</li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}">Signup</a></li>
+        {% endif %}  
+    </ul>
+   
+</nav>
+
+<script>
+// Theme Toggle Script
+const themeToggle = document.getElementById('themeToggle');
+const htmlElement = document.documentElement;
+
+// Load saved theme preference
+const savedTheme = localStorage.getItem('theme') || 'light';
+htmlElement.setAttribute('data-theme', savedTheme);
+updateThemeButton(savedTheme);
+
+themeToggle.addEventListener('click', () => {
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    htmlElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeButton(newTheme);
+});
+
+function updateThemeButton(theme) {
+    themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
+    themeToggle.style.background = theme === 'light' ? 'var(--soft-gold)' : 'var(--accent-soft)';
+}
+</script>
+
+{% block content %}{% endblock %}
+
+</body>
+</html>

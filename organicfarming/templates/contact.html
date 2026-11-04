@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Organic Farming</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+       :root {
+    --primary-green: #234232;      /* Deep Forest Green */
+    --light-green: #4b5d3a;        /* Dark Olive */
+    --accent-green: #c7a86b;       /* Gold Beige */
+    --dark-bg: #121a14;            /* Premium Dark Background */
+    --card-bg: rgba(255, 248, 240, 0.08); /* Soft Ivory Glass */
+    --text-primary: #f8f5ee;       /* Ivory */
+    --text-secondary: #d6c7ad;     /* Warm Beige */
+}
+        
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a2f2a 100%);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(45, 157, 111, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(78, 205, 196, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Floating animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 20px rgba(45, 157, 111, 0.5); }
+            50% { text-shadow: 0 0 30px rgba(78, 205, 196, 0.7); }
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0.5); opacity: 0; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(45, 157, 111, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(78, 205, 196, 0.6); }
+        }
+
+        @keyframes ripple {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(4); opacity: 0; }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #4ecdc4 0%, #2d9d6f 50%, #4ecdc4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-btn {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border: 2px solid var(--accent-green);
+            background: linear-gradient(135deg, var(--accent-green), var(--light-green));
+            color: var(--text-primary);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            font-weight: 600;
+        }
+
+        .hero-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(45, 157, 111, 0.4);
+        }
+
+        .hero-btn:active::before {
+            animation: ripple 0.6s ease-out;
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        /* Contact Form Section */
+        .contact-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--text-primary);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .form-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(78, 205, 196, 0.2);
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(78, 205, 196, 0.2);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            backdrop-filter: blur(5px);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background: rgba(78, 205, 196, 0.1);
+            border-color: var(--accent-green);
+            box-shadow: 0 0 20px rgba(78, 205, 196, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .form-group label.active {
+            color: var(--accent-green);
+            transform: translateY(-5px);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--accent-green), var(--light-green));
+            border: none;
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(45, 157, 111, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Contact Details Section */
+        .details-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, rgba(45, 157, 111, 0.1), rgba(78, 205, 196, 0.05));
+        }
+
+        .details-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .detail-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(78, 205, 196, 0.2);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-green);
+            box-shadow: 0 15px 40px rgba(78, 205, 196, 0.2);
+        }
+
+        .detail-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .detail-card:hover .detail-icon {
+            transform: scale(1.1) rotate(5deg);
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .detail-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--accent-green);
+        }
+
+        .detail-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Action Cards */
+        .action-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .action-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .action-card {
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(78, 205, 196, 0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(78, 205, 196, 0.2);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            perspective: 1000px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .action-card:hover {
+            transform: rotateX(5deg) rotateY(-5deg) translateZ(20px);
+            box-shadow: 0 20px 50px rgba(78, 205, 196, 0.3);
+            border-color: var(--accent-green);
+        }
+
+        .action-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--accent-green);
+        }
+
+        .action-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Social Section */
+        .social-section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(78, 205, 196, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.2);
+            background: linear-gradient(135deg, var(--accent-green), var(--light-green));
+            border-color: var(--accent-green);
+            box-shadow: 0 0 25px rgba(78, 205, 196, 0.5);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, rgba(45, 157, 111, 0.2), rgba(78, 205, 196, 0.1));
+            text-align: center;
+            border-radius: 20px;
+            margin: 80px 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #4ecdc4 0%, #2d9d6f 50%, #4ecdc4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-btn {
+            padding: 18px 50px;
+            font-size: 1.1rem;
+            border: 2px solid var(--accent-green);
+            background: linear-gradient(135deg, var(--accent-green), var(--light-green));
+            color: var(--text-primary);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(45, 157, 111, 0.4);
+            animation: none;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, rgba(26, 93, 58, 0.3), rgba(45, 157, 111, 0.1));
+            border-top: 1px solid rgba(78, 205, 196, 0.2);
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 30px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .detail-card,
+            .action-card {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .social-icons {
+                gap: 20px;
+            }
+        }
+
+        /* Success message */
+        .success-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--accent-green), var(--light-green));
+            color: var(--text-primary);
+            padding: 20px 30px;
+            border-radius: 10px;
+            opacity: 0;
+            transform: translateY(-30px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .success-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .map-section {
+    padding: 60px 20px;
+    text-align: center;
+    background: linear-gradient(to bottom, #f4fff4, #e8f5e9);
+}
+
+.map-section h2 {
+    font-size: 28px;
+    color: #1b5e20;
+    margin-bottom: 10px;
+}
+
+.map-subtitle {
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.map-container {
+    max-width: 900px;
+    margin: auto;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 350px;
+    border: none;
+}
+
+/* Hover effect */
+.map-container:hover {
+    transform: scale(1.02);
+}
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Connect With Nature 🌱</h1>
+            <p>Join our organic farming community. Let's grow together and make a difference for our planet.</p>
+            <button class="hero-btn" onclick="scrollToForm()">Send a Message</button>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="contact-section" id="contact-form">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="form-container">
+            <form id="contactForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contact Details Section -->
+    <section class="details-section">
+        <h2 class="section-title">Contact Information</h2>
+        <div class="details-container">
+            <div class="detail-card">
+                <div class="detail-icon">📍</div>
+                <h3>Address</h3>
+                <p>Green Valley Farm, Nature Road<br>Eco City, EC 12345</p>
+            </div>
+
+            <div class="detail-card">
+                <div class="detail-icon">📞</div>
+                <h3>Phone</h3>
+                <p>+1 (555) 123-4567<br>Available 24/7</p>
+            </div>
+
+            <div class="detail-card">
+                <div class="detail-icon">✉️</div>
+                <h3>Email</h3>
+                <p>hello@organicfarm.com<br>support@organicfarm.com</p>
+            </div>
+
+            <div class="detail-card">
+                <div class="detail-icon">🕐</div>
+                <h3>Working Hours</h3>
+                <p>Mon - Fri: 8:00 AM - 6:00 PM<br>Sat - Sun: 9:00 AM - 4:00 PM</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Action Cards Section -->
+    <section class="action-section">
+        <h2 class="section-title">How Can We Help?</h2>
+        <div class="action-cards">
+            <div class="action-card">
+                <h4>💬 Customer Support</h4>
+                <p>Get instant help with your orders, deliveries, and product inquiries.</p>
+            </div>
+
+            <div class="action-card">
+                <h4>👨‍🌾 Farmer Help</h4>
+                <p>Guidance for farmers on sustainable practices and organic certification.</p>
+            </div>
+
+            <div class="action-card">
+                <h4>🚚 Bulk Orders</h4>
+                <p>Special pricing and support for wholesale and bulk organic orders.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Section -->
+    <section class="social-section">
+        <h2 class="section-title">Follow Us</h2>
+        <div class="social-icons">
+            <div class="social-icon">f</div>
+            <div class="social-icon">🐦</div>
+            <div class="social-icon">📷</div>
+            <div class="social-icon">💼</div>
+            <div class="social-icon">💬</div>
+        </div>
+    </section>
+    <div class="map-section">
+    <h2>📍 Visit Our Store</h2>
+    <p class="map-subtitle">Find us in Madivala, Bangalore</p>
+
+    <div class="map-container">
+        <iframe 
+            src="https://www.google.com/maps?q=Madivala,Bangalore&output=embed"
+            loading="lazy">
+        </iframe>
+    </div>
+</div>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Let's Grow Together 🌿</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 30px;">Be part of the organic farming revolution. Contact us today to learn more.</p>
+        <button class="cta-btn" onclick="scrollToForm()">Contact Now</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Organic Farming Co. All rights reserved. | Cultivating Nature, Nurturing Life</p>
+    </footer>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        ✓ Message sent successfully! We'll get back to you soon.
+    </div>
+
+    <script>
+        // Form submission handler
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const form = document.getElementById('contactForm');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Simulate form submission
+            setTimeout(() => {
+                form.reset();
+                successMessage.classList.add('show');
+                
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                }, 3000);
+            }, 500);
+        }
+
+        // Scroll to form
+        function scrollToForm() {
+            document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Form input label animation
+        document.querySelectorAll('.form-group input, .form-group textarea').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.querySelector('label').classList.add('active');
+            });
+
+            input.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.parentElement.querySelector('label').classList.remove('active');
+                }
+            });
+        });
+
+        // Particles background effect
+        function createParticles() {
+            const hero = document.querySelector('.hero');
+            if (!hero) return;
+
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 80 + 20;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.background = Math.random() > 0.5 
+                    ? 'rgba(78, 205, 196, 0.1)' 
+                    : 'rgba(45, 157, 111, 0.1)';
+                
+                hero.appendChild(particle);
+            }
+        }
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            createParticles();
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.detail-card, .action-card').forEach(el => {
+            el.style.opacity = '0.8';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+
+    /* Luxury Eco Premium Background */
+    background: linear-gradient(
+        135deg,
+        #f8f4eb 0%,
+        #efe4d1 50%,
+        #e7dcc8 100%
+    );
+
+    color: #1f2e1f;
+}
+
+/* Main Container */
+.contact-container {
+    max-width: 1000px;
+
+    margin: 70px auto;
+
+    display: flex;
+    gap: 50px;
+
+    align-items: flex-start;
+}
+
+/* Left Side */
+.left-section {
+    flex: 1;
+}
+
+.left-section h1 {
+
+    font-size: 36px;
+
+    margin-bottom: 14px;
+
+    color: #223120;
+
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+}
+
+.left-section p {
+
+    color: #5f6957;
+
+    margin-bottom: 22px;
+
+    line-height: 1.8;
+
+    font-size: 15px;
+}
+
+.left-section p strong {
+
+    color: #2f4a2f;
+
+    font-weight: 700;
+}
+
+/* Right Side */
+.right-section {
+    flex: 1;
+}
+
+/* Premium Form Box */
+form {
+
+    background: rgba(255, 253, 248, 0.97);
+
+    padding: 38px;
+
+    border-radius: 28px;
+
+    border: 1px solid #d8c6a8;
+
+    box-shadow:
+        0 20px 45px rgba(26, 41, 22, 0.14);
+
+    backdrop-filter: blur(12px);
+}
+
+/* Form Title */
+form h2 {
+
+    margin-bottom: 24px;
+
+    font-size: 26px;
+
+    color: #223120;
+
+    font-weight: 700;
+}
+
+/* Inputs */
+input,
+textarea {
+
+    width: 100%;
+
+    padding: 15px;
+
+    margin: 12px 0;
+
+    border: 1px solid #d8c6a8;
+
+    border-radius: 14px;
+
+    font-size: 14px;
+
+    background: #fffdf8;
+
+    color: #223120;
+
+    transition: all 0.3s ease;
+
+    box-sizing: border-box;
+}
+
+/* Input Focus */
+input:focus,
+textarea:focus {
+
+    outline: none;
+
+    border-color: #b88646;
+
+    box-shadow:
+        0 0 0 4px rgba(184, 134, 70, 0.16);
+
+    background: #ffffff;
+}
+
+/* Placeholder */
+input::placeholder,
+textarea::placeholder {
+
+    color: #8b9482;
+}
+
+/* Luxury Button */
+button {
+
+    width: 100%;
+
+    padding: 15px;
+
+    margin-top: 16px;
+
+    background: linear-gradient(
+        135deg,
+        #b88646,
+        #d4a867
+    );
+
+    color: white;
+
+    border: none;
+
+    border-radius: 999px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+
+    box-shadow:
+        0 14px 28px rgba(184, 134, 70, 0.24);
+}
+
+button:hover {
+
+    background: linear-gradient(
+        135deg,
+        #9b6c34,
+        #c89a57
+    );
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 18px 34px rgba(184, 134, 70, 0.34);
+}
+
+/* Map Section */
+.map-section {
+
+    margin-top: 90px;
+
+    text-align: center;
+}
+
+.map-section h2 {
+
+    color: #223120;
+
+    margin-bottom: 24px;
+
+    font-size: 32px;
+
+    font-weight: 700;
+}
+
+/* Luxury Map Card */
+.map-section iframe {
+
+    border-radius: 28px;
+
+    border: 1px solid #d8c6a8;
+
+    box-shadow:
+        0 20px 45px rgba(26, 41, 22, 0.18);
+
+    transition: all 0.35s ease;
+}
+
+.map-section iframe:hover {
+
+    transform: scale(1.02);
+
+    box-shadow:
+        0 26px 55px rgba(26, 41, 22, 0.24);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+
+    .contact-container {
+
+        flex-direction: column;
+
+        padding: 0 20px;
+    }
+
+    form {
+        padding: 30px;
+    }
+
+    .left-section h1 {
+        font-size: 30px;
+    }
+}

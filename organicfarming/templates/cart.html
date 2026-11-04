@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Organic Farming</title>
+<link rel="stylesheet" href="/static/style.css">
+   <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f4; padding: 20px; }
+        .cart-wrapper { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .cart-header { text-align: center; color: #2e7d32; border-bottom: 2px solid #2e7d32; padding-bottom: 10px; }
+        
+        .cart-item { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #eee; }
+        .cart-item img { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid #ddd; }
+        .item-info { flex-grow: 1; margin-left: 15px; }
+        .item-info h4 { margin: 0; color: #333; }
+        .item-info p { margin: 5px 0 0; color: #666; font-weight: bold; }
+
+        .cart-total { margin-top: 20px; text-align: right; font-size: 1.2rem; font-weight: bold; padding: 10px; background: #e8f5e9; border-radius: 5px; }
+        
+        .checkout-btn { display: block; text-align: center; background: #2e7d32; color: white; padding: 12px; text-decoration: none; border-radius: 5px; margin-top: 15px; transition: 0.3s; }
+        .checkout-btn:hover { background: #1b5e20; }
+        .remove-btn { background: #ff5252; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; }
+        .remove-btn:hover { background: #d32f2f; }
+        .quantity-controls { display: flex; align-items: center; margin-right: 10px; }
+        .quantity-controls button { width: 25px; height: 25px; border: none; background: #2e7d32; color: white; cursor: pointer; border-radius: 3px; }
+        .quantity-controls button:hover { background: #1b5e20; }
+        .quantity-controls span { margin: 0 8px; font-weight: bold; }
+    </style> 
+    <style>
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #4caf50;
+    color: white;
+    padding: 16px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    max-width: 300px;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease;
+}
+.notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+.notification.success {
+    background: #4caf50;
+}
+.notification.error {
+    background: #f44336;
+}
+.notification.warning {
+    background: #ff9800;
+}
+.notification.info {
+    background: #2196f3;
+}
+.notification .close-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+.notification .close-btn:hover {
+    opacity: 1;
+}
+</style>
+    
+</head>
+<body>
+    
+<div class="cart-wrapper">
+    <h1 class="cart-header">Your Shopping Cart</h1>
+    
+    <div id="cart-items">
+        <p style="text-align:center;">Loading your cart...</p>
+    </div>
+
+    <div class="cart-total">
+        <span>Total Amount: </span>
+        <span id="total-price">₹0</span>
+    </div>
+
+    <a href="#" class="checkout-btn" onclick="proceedPayment()">Proceed to Payment</a>
+    <button onclick="clearCart()" style="margin-top:10px; background:none; border:none; color:red; cursor:pointer; width:100%;">Clear All Items</button>
+</div>
+
+<script>
+function showNotification(message, type = "info") {
+    // Remove existing notifications
+    const existingNotifications = document.querySelectorAll('.notification');
+    existingNotifications.forEach(notification => notification.remove());
+
+    // Create new notification
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <span>${message}</span>
+        <button class="close-btn" onclick="this.parentElement.remove()">×</button>
+    `;
+
+    document.body.appendChild(notification);
+
+    // Trigger animation
+    setTimeout(() => notification.classList.add('show'), 10);
+
+    // Auto remove after 3 seconds
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+
+    function displayCart() {
+        const cartItemsContainer = document.getElementById("cart-items");
+        const totalPriceElement = document.getElementById("total-price");
+        
+        // Retrieve cart from local storage
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        
+        // Set background based on cart status
+        if (cart.length === 0) {
+            document.body.style.backgroundColor = "#ffebee"; // Light red for empty cart
+        } else {
+            document.body.style.backgroundColor = "#f4f4f4"; // Original light gray for cart with items
+        }
+        
+        cartItemsContainer.innerHTML = "";
+        let total = 0;
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = "<div style='text-align:center; padding: 20px;'>Your cart is empty!</div>";
+            totalPriceElement.innerText = "₹0";
+            return;
+        }
+
+        cart.forEach((item, index) => {
+            // Ensure price is treated as a number
+            const price = parseFloat(item.price) || 0;
+            const quantity = item.quantity || 1;
+            total += price * quantity;
+
+            const itemDiv = document.createElement("div");
+            itemDiv.className = "cart-item";
+        
+            // Note: item.image must be a valid path (e.g., 'apple.jpg' or 'https://...')
+          // Add 'images/' to the path so it matches your folder structure
+         itemDiv.innerHTML = `
+              <img src="/static/images/${item.image}" alt="${item.name}" onerror="this.onerror=null;this.src='https://via.placeholder.com/70?text=Error';">
+              <div class="item-info">
+              <h4>${item.name}</h4>
+               <p>₹${item.price} x ${item.quantity || 1} = ₹${(item.price * (item.quantity || 1)).toFixed(2)}</p>
+           </div>
+           <div class="quantity-controls">
+               <button onclick="decreaseQuantity(${index})">-</button>
+               <span>${item.quantity || 1}</span>
+               <button onclick="increaseQuantity(${index})">+</button>
+           </div>
+          <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+       `;
+            cartItemsContainer.appendChild(itemDiv);
+        });
+
+        totalPriceElement.innerText = "₹" + total;
+    }
+
+    function removeItem(index) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        displayCart();
+    }
+
+    function increaseQuantity(index) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        if (!cart[index].quantity) cart[index].quantity = 1;
+        cart[index].quantity += 1;
+        localStorage.setItem("cart", JSON.stringify(cart));
+        displayCart();
+    }
+
+    function decreaseQuantity(index) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        if (!cart[index].quantity) cart[index].quantity = 1;
+        if (cart[index].quantity > 1) {
+            cart[index].quantity -= 1;
+        } else {
+            cart.splice(index, 1);
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        displayCart();
+    }
+
+    function clearCart() {
+        if(confirm("Are you sure you want to empty your cart?")) {
+            localStorage.removeItem("cart");
+            displayCart();
+        }
+    }
+
+    function checkout() {
+        if(JSON.parse(localStorage.getItem("cart"))?.length > 0) {
+            showNotification("Thank you for your order! This feature is coming soon.", "success");
+        } else {
+            showNotification("Your cart is empty!", "warning");
+        }
+    }
+
+    function proceedPayment(){
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if(cart.length === 0){
+        showNotification("Your cart is empty!", "warning");
+        return;
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    window.location.href = "/cart/delivery/";
+}
+
+    // Load cart on page startup
+    window.onload = displayCart;
+</script>
+
+
+</body>
+</html>
